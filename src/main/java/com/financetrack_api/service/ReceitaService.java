@@ -34,19 +34,18 @@ public class ReceitaService {
 	
 	@Transactional(readOnly = true)
 	public ReceitaDTO detalhar(Long id) {
-		var receita = repository.getReferenceById(id);
+		var receita = repository.findById(id)
+				.orElseThrow(() -> new ObjetoNaoEncontradoException("Receita não encontrada com ID: "+id));
 		return new ReceitaDTO(receita);
 	}
 	
 	@Transactional
 	public ReceitaDTO atualizar(Long id, ReceitaDTO dadosReceita) {
+		System.out.println("teste");
 		var receita = repository.findById(id)
-				.orElseThrow(() -> new ObjetoNaoEncontradoException("Receita não encontrada com ID: "+id));
+				.orElseThrow(() -> new ObjetoNaoEncontradoException("Receita não encontrada com ID: "+id));	
 		
-		if(!dadosReceita.descricao().isEmpty()) receita.setDescricao(dadosReceita.descricao());
-		if(dadosReceita.valor() != null) receita.setValor(dadosReceita.valor());
-		if(dadosReceita.data() != null) receita.setData(dadosReceita.data());
-		
+		receita.atualizarDados(dadosReceita);
 		repository.save(receita);
 		
 		return new ReceitaDTO(receita);
@@ -55,7 +54,7 @@ public class ReceitaService {
 	@Transactional
 	public String deletar(Long id) {
 		if(!repository.existsById(id)) {
-			throw new ObjetoNaoEncontradoException("Receita não encontrada com ID"+id);
+			throw new ObjetoNaoEncontradoException("Receita não encontrada com ID: "+id);
 		}
 		
 		repository.deleteById(id);

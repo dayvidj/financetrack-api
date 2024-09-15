@@ -40,11 +40,11 @@ public class ReceitaController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity atiualizarReceita(@PathVariable Long id, ReceitaDTO dados) {
+	public ResponseEntity atiualizarReceita(@PathVariable Long id, @RequestBody ReceitaDTO dados) {
 		return ResponseEntity.ok(service.atualizar(id, dados));
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity excluirReceita(@PathVariable Long id) {
 		return ResponseEntity.ok(service.deletar(id));
 	}

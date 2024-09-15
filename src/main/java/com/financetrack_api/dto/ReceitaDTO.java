@@ -23,5 +23,5 @@ public record ReceitaDTO(
 	public ReceitaDTO(Receita dadosReceita) {
 		this(dadosReceita.getDescricao(), dadosReceita.getValor(), dadosReceita.getData());
 	}
-	
+
 }

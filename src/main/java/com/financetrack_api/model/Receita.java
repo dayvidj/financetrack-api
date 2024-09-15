@@ -36,4 +36,10 @@ public class Receita {
 		data = dados.data();
 	}
 
+	public void atualizarDados(ReceitaDTO dados) {
+		if(dados.descricao() != null && !dados.descricao().isBlank()) this.descricao = dados.descricao();
+		if(dados.valor() != null) this.valor = dados.valor();
+		if(dados.data() != null) this.data = dados.data();
+	}
+
 }
