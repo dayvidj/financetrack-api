@@ -56,8 +56,7 @@ public class DespesaService {
 	
 	@Transactional
 	public String deletarDespesa(Long id) {
-		var despesa = repository.findById(id)
-				.orElseThrow(() -> new ObjetoNaoEncontradoException("Despesa não encontrada com ID: "+id));	
+		repository.findById(id).orElseThrow(() -> new ObjetoNaoEncontradoException("Despesa não encontrada com ID: "+id));	
 		
 		repository.deleteById(id);
 		
