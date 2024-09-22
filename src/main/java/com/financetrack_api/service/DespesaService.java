@@ -20,8 +20,9 @@ public class DespesaService {
 	
 	@Transactional
 	public void CadastrarDespesa(DespesaDTO dados) {
-		if(repository.existsByDescricao(dados.descricao())) {
-			throw new EntidadeDuplicadaException("Despesa duplicada");
+		var despesa = repository.findDespesaDuplicada(dados.descricao(), dados.data().getMonthValue(), dados.data().getYear());
+		if(despesa.isPresent()) {	
+			throw new EntidadeDuplicadaException("Despesa duplicada");		
 		}
 		
 		repository.save(new Despesa(dados));

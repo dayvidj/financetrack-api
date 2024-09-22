@@ -20,7 +20,8 @@ public class ReceitaService {
 	
 	@Transactional
 	public void salvar(ReceitaDTO dados) {
-		if(repository.existsByDescricao(dados.descricao())) {
+		var receita = repository.findReceitaDuplicada(dados.descricao(), dados.data().getMonthValue(), dados.data().getYear());
+		if(receita.isPresent()) {
 			throw new EntidadeDuplicadaException("Receita duplicada");
 		}
 		repository.save(new Receita(dados));

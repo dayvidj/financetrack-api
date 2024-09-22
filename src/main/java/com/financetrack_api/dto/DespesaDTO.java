@@ -11,9 +11,16 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record DespesaDTO(
-		@NotBlank String descricao, 
-		@NotNull @Positive BigDecimal valor, 
-		@NotNull LocalDate data, 
+		@NotBlank 
+		String descricao, 
+		
+		@NotNull 
+		@Positive 
+		BigDecimal valor, 
+		
+		@NotNull 
+		LocalDate data, 
+		
 		Categoria categoria) {
 
 	public DespesaDTO(Despesa despesa) {

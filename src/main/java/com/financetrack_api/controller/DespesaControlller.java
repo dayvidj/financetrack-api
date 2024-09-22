@@ -40,7 +40,7 @@ public class DespesaControlller {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity atiualizar(@PathVariable Long id, @RequestBody DespesaDTO dados) {
+	public ResponseEntity atualizar(@PathVariable Long id, @RequestBody DespesaDTO dados) {
 		return ResponseEntity.ok(service.atualizarDespesa(id, dados));
 	}
 
