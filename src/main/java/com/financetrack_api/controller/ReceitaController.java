@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financetrack_api.dto.ReceitaDTO;
@@ -30,8 +31,8 @@ public class ReceitaController {
 	}
 
 	@GetMapping
-	public ResponseEntity listarReceitas() {
-		return ResponseEntity.ok(service.listar());
+	public ResponseEntity listarReceitas(@RequestParam(required = false) String descricao) {
+		return ResponseEntity.ok(service.listar(descricao));
 	}
 
 	@GetMapping("/{id}")

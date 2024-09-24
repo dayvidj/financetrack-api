@@ -28,9 +28,17 @@ public class ReceitaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<ReceitaDTO> listar() {
-		var receitas = repository.findAll().stream().map(ReceitaDTO::new).toList();
-		return receitas;			
+	public List<ReceitaDTO> listar(String descricao) {
+		List<Receita> receitas;
+		
+		if(descricao != null && !descricao.isEmpty()) {
+			receitas = repository.findByDescricaoContainingIgnoreCase(descricao);
+		}
+		else {
+			receitas = repository.findAll();
+		}
+		
+		return receitas.stream().map(ReceitaDTO::new).toList();		
 	}
 	
 	@Transactional(readOnly = true)

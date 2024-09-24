@@ -29,12 +29,18 @@ public class DespesaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<DespesaDTO> listarDespesas() {
-		var despesas = repository.findAll().stream().map(DespesaDTO::new).toList();
+	public List<DespesaDTO> listarDespesas(String descricao) {
+		List<Despesa> despesas;
 		
-		return despesas;	
-	}
-	
+		if(descricao != null && !descricao.isEmpty()) {
+			despesas = repository.findByDescricaoContainingIgnoreCase(descricao);
+		}
+		else {
+			despesas = repository.findAll();
+		}
+		
+		return despesas.stream().map(DespesaDTO::new).toList();	
+	}	
 	
 	@Transactional(readOnly = true)
 	public DespesaDTO detalharDespesa(Long id) {
