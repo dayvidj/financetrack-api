@@ -50,6 +50,12 @@ public class DespesaService {
 		return new DespesaDTO(despesa);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<DespesaDTO> listarDespesasPorMes(int ano, int mes) {
+		List<Despesa> despesas = repository.findByAnoAndMes(ano, mes);
+		return despesas.stream().map(DespesaDTO::new).toList();
+	}
+
 	@Transactional
 	public DespesaDTO atualizarDespesa(Long id, DespesaDTO dados) {
 		var despesa = repository.findById(id)
@@ -69,5 +75,5 @@ public class DespesaService {
 		
 		return "Despesa deletada com sucesso!";
 	}
-	
+
 }

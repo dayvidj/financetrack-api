@@ -16,4 +16,7 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 
 	List<Despesa> findByDescricaoContainingIgnoreCase(String descricao);
 
+	@Query("SELECT d FROM Despesa d WHERE YEAR(d.data) = :ano AND MONTH(d.data) = :mes")
+    List<Despesa> findByAnoAndMes(@Param("ano") int ano, @Param("mes") int mes);
+
 }

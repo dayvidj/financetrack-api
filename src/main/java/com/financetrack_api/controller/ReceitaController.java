@@ -39,6 +39,11 @@ public class ReceitaController {
 	public ResponseEntity detalharReceita(@PathVariable Long id) {
 		return ResponseEntity.ok(service.detalhar(id));
 	}
+	
+	@GetMapping("/{ano}/{mes}")
+	public ResponseEntity listarReceitaPorMes(@PathVariable int ano, @PathVariable int mes) {
+		return ResponseEntity.ok(service.listarPorMes(ano, mes));
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity atiualizarReceita(@PathVariable Long id, @RequestBody ReceitaDTO dados) {

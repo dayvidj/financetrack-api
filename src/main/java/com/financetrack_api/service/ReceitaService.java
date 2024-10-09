@@ -48,6 +48,12 @@ public class ReceitaService {
 		return new ReceitaDTO(receita);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<ReceitaDTO> listarPorMes(int ano, int mes) {
+		var receitas = repository.findByAnoAndMes(ano, mes);
+		return receitas.stream().map(ReceitaDTO::new).toList();
+	}
+	
 	@Transactional
 	public ReceitaDTO atualizar(Long id, ReceitaDTO dadosReceita) {
 		System.out.println("teste");

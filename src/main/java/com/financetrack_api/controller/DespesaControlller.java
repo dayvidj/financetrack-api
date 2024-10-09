@@ -39,6 +39,11 @@ public class DespesaControlller {
 	public ResponseEntity detalhar(@PathVariable Long id) {
 		return ResponseEntity.ok(service.detalharDespesa(id));
 	}
+	
+	@GetMapping("/{ano}/{mes}")
+	public ResponseEntity listarPorMes(@PathVariable int ano, @PathVariable int mes) {
+		return ResponseEntity.ok(service.listarDespesasPorMes(ano, mes));
+	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity atualizar(@PathVariable Long id, @RequestBody DespesaDTO dados) {
